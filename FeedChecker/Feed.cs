@@ -13,9 +13,9 @@ namespace FeedChecker
 
         public string Result { get; private set; }
 
-        public static IEnumerable<string> GetCoreFx20Preview1(Feed feed)
+        public IEnumerable<string> GetCoreFx20Preview1()
         {
-            var lines = SplitFeedIntoLines(feed);
+            var lines = SplitFeedIntoLines(this);
 
             return GetCoreFx20Preview1(lines);
         }

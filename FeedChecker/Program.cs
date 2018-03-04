@@ -20,7 +20,7 @@ namespace FeedChecker
             var packageUrl = feedUrl.GetPackageUrl();
             var result = GetFeed(packageUrl);
             var feed = new Feed(result);
-            return Feed.GetCoreFx20Preview1(feed);
+            return feed.GetCoreFx20Preview1();
         }
 
         private static string GetFeed(string packageUrl)
