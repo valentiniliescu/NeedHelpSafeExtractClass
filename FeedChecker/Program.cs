@@ -17,7 +17,7 @@ namespace FeedChecker
 
         public static IEnumerable<string> GetAllCoreFxPreview1(FeedUrl feedUrl)
         {
-            var packageUrl = GetPackageUrl(feedUrl);
+            var packageUrl = FeedUrl.GetPackageUrl(feedUrl);
             var result = GetFeed(packageUrl);
             var lines = SplitFeedIntoLines(result);
 
@@ -55,15 +55,6 @@ namespace FeedChecker
             }
 
             return result;
-        }
-
-        private static string GetPackageUrl(FeedUrl feedUrl)
-        {
-            if (!feedUrl.Feed.EndsWith("/"))
-                feedUrl.Feed = feedUrl.Feed + "/";
-
-            var packageUrl = feedUrl.Feed + "main/binary-amd64/Packages";
-            return packageUrl;
         }
     }
 }
