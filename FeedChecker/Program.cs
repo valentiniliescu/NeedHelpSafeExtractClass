@@ -19,9 +19,7 @@ namespace FeedChecker
         {
             var packageUrl = GetPackageUrl(feed);
             var result = GetFeed(packageUrl);
-            var lines = result.Split(
-                new[] {"\r\n", "\r", "\n"},
-                StringSplitOptions.None);
+            var lines = SplitFeedIntoLines(result);
 
             var onlyCoreFxPreview1ButWithPackgeInFront =
                 lines.Where(l => l.StartsWith("Package: dotnet-hostfxr-2.0.0-preview1"));
@@ -29,6 +27,14 @@ namespace FeedChecker
             // imagine there is more code
 
             return onlyCoreFxPreview1ButWithPackgeInFront.Select(l => l.Replace("Package: ", ""));
+        }
+
+        private static string[] SplitFeedIntoLines(string result)
+        {
+            var lines = result.Split(
+                new[] {"\r\n", "\r", "\n"},
+                StringSplitOptions.None);
+            return lines;
         }
 
         private static string GetFeed(string packageUrl)
