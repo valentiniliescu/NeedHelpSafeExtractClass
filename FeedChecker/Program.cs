@@ -17,7 +17,7 @@ namespace FeedChecker
 
         public static IEnumerable<string> GetAllCoreFxPreview1(FeedUrl feedUrl)
         {
-            var packageUrl = FeedUrl.GetPackageUrl(feedUrl);
+            var packageUrl = feedUrl.GetPackageUrl();
             var result = GetFeed(packageUrl);
             var lines = SplitFeedIntoLines(result);
 

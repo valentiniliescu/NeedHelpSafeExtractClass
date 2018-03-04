@@ -9,12 +9,12 @@
 
         public string Feed { get; set; }
 
-        public static string GetPackageUrl(FeedUrl feedUrl)
+        public string GetPackageUrl()
         {
-            if (!feedUrl.Feed.EndsWith("/"))
-                feedUrl.Feed = feedUrl.Feed + "/";
+            if (!Feed.EndsWith("/"))
+                Feed = Feed + "/";
 
-            var packageUrl = feedUrl.Feed + "main/binary-amd64/Packages";
+            var packageUrl = Feed + "main/binary-amd64/Packages";
             return packageUrl;
         }
     }
