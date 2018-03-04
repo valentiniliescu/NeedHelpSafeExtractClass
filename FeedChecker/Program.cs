@@ -7,16 +7,6 @@ using System.Text;
 
 namespace FeedChecker
 {
-    public class FeedUrl
-    {
-        public FeedUrl(string feed)
-        {
-            Feed = feed;
-        }
-
-        public string Feed { get; set; }
-    }
-
     public class Program
     {
         public static void Main(string[] args)
