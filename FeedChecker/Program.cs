@@ -18,15 +18,7 @@ namespace FeedChecker
         public static IEnumerable<string> GetAllCoreFxPreview1(string feed)
         {
             var packageUrl = GetPackageUrl(feed);
-            var request = (HttpWebRequest) WebRequest.Create(packageUrl);
-
-            var result = "";
-            var response = request.GetResponse();
-            using (var responseStream = response.GetResponseStream())
-            {
-                var reader = new StreamReader(responseStream, Encoding.UTF8);
-                result = reader.ReadToEnd();
-            }
+            var result = GetFeed(packageUrl);
             var lines = result.Split(
                 new[] {"\r\n", "\r", "\n"},
                 StringSplitOptions.None);
@@ -37,6 +29,21 @@ namespace FeedChecker
             // imagine there is more code
 
             return onlyCoreFxPreview1ButWithPackgeInFront.Select(l => l.Replace("Package: ", ""));
+        }
+
+        private static string GetFeed(string packageUrl)
+        {
+            var request = (HttpWebRequest) WebRequest.Create(packageUrl);
+
+            var result = "";
+            var response = request.GetResponse();
+            using (var responseStream = response.GetResponseStream())
+            {
+                var reader = new StreamReader(responseStream, Encoding.UTF8);
+                result = reader.ReadToEnd();
+            }
+
+            return result;
         }
 
         private static string GetPackageUrl(string feed)
