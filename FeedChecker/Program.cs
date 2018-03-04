@@ -7,6 +7,16 @@ using System.Text;
 
 namespace FeedChecker
 {
+    public class Feed
+    {
+        public Feed(string result)
+        {
+            Result = result;
+        }
+
+        public string Result { get; private set; }
+    }
+
     public class Program
     {
         public static void Main(string[] args)
@@ -19,7 +29,7 @@ namespace FeedChecker
         {
             var packageUrl = feedUrl.GetPackageUrl();
             var result = GetFeed(packageUrl);
-            var lines = SplitFeedIntoLines(result);
+            var lines = SplitFeedIntoLines(new Feed(result));
 
             return GetCoreFx20Preview1(lines);
         }
@@ -34,9 +44,9 @@ namespace FeedChecker
             return onlyCoreFxPreview1ButWithPackgeInFront.Select(l => l.Replace("Package: ", ""));
         }
 
-        private static string[] SplitFeedIntoLines(string result)
+        private static string[] SplitFeedIntoLines(Feed feed)
         {
-            var lines = result.Split(
+            var lines = feed.Result.Split(
                 new[] {"\r\n", "\r", "\n"},
                 StringSplitOptions.None);
             return lines;
