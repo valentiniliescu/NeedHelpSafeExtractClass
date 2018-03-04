@@ -11,13 +11,13 @@ namespace FeedChecker
     {
         public static void Main(string[] args)
         {
-            foreach (var l in GetAllCoreFxPreview1("http://apt-mo.trafficmanager.net/repos/dotnet/dists/jessie"))
+            foreach (var l in GetAllCoreFxPreview1(new FeedUrl("http://apt-mo.trafficmanager.net/repos/dotnet/dists/jessie")))
                 Console.WriteLine(l);
         }
 
-        public static IEnumerable<string> GetAllCoreFxPreview1(string feed)
+        public static IEnumerable<string> GetAllCoreFxPreview1(FeedUrl feedUrl)
         {
-            var packageUrl = GetPackageUrl(new FeedUrl(feed));
+            var packageUrl = GetPackageUrl(feedUrl);
             var result = GetFeed(packageUrl);
             var lines = SplitFeedIntoLines(result);
 
