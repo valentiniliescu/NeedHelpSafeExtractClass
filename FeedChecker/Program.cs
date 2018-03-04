@@ -21,6 +21,11 @@ namespace FeedChecker
             var result = GetFeed(packageUrl);
             var lines = SplitFeedIntoLines(result);
 
+            return GetCoreFx20Preview1(lines);
+        }
+
+        private static IEnumerable<string> GetCoreFx20Preview1(string[] lines)
+        {
             var onlyCoreFxPreview1ButWithPackgeInFront =
                 lines.Where(l => l.StartsWith("Package: dotnet-hostfxr-2.0.0-preview1"));
 
