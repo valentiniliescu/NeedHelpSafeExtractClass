@@ -20,6 +20,11 @@ namespace FeedChecker
             var packageUrl = feedUrl.GetPackageUrl();
             var result = GetFeed(packageUrl);
             var feed = new Feed(result);
+            return GetCoreFx20Preview1(feed);
+        }
+
+        private static IEnumerable<string> GetCoreFx20Preview1(Feed feed)
+        {
             var lines = SplitFeedIntoLines(feed);
 
             return GetCoreFx20Preview1(lines);
