@@ -29,7 +29,8 @@ namespace FeedChecker
         {
             var packageUrl = feedUrl.GetPackageUrl();
             var result = GetFeed(packageUrl);
-            var lines = SplitFeedIntoLines(new Feed(result));
+            var feed = new Feed(result);
+            var lines = SplitFeedIntoLines(feed);
 
             return GetCoreFx20Preview1(lines);
         }
