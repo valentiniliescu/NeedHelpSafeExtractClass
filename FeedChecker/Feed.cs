@@ -15,7 +15,7 @@ namespace FeedChecker
 
         public IEnumerable<string> GetCoreFx20Preview1()
         {
-            var lines = SplitFeedIntoLines(this);
+            var lines = SplitFeedIntoLines();
 
             return GetCoreFx20Preview1(lines);
         }
@@ -30,9 +30,9 @@ namespace FeedChecker
             return onlyCoreFxPreview1ButWithPackgeInFront.Select(l => l.Replace("Package: ", ""));
         }
 
-        private static string[] SplitFeedIntoLines(Feed feed)
+        public string[] SplitFeedIntoLines()
         {
-            var lines = feed.Result.Split(
+            var lines = Result.Split(
                 new[] {"\r\n", "\r", "\n"},
                 StringSplitOptions.None);
             return lines;
