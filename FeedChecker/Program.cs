@@ -7,6 +7,16 @@ using System.Text;
 
 namespace FeedChecker
 {
+    public class FeedUrl
+    {
+        public FeedUrl(string feed)
+        {
+            Feed = feed;
+        }
+
+        public string Feed { get; set; }
+    }
+
     public class Program
     {
         public static void Main(string[] args)
@@ -17,7 +27,7 @@ namespace FeedChecker
 
         public static IEnumerable<string> GetAllCoreFxPreview1(string feed)
         {
-            var packageUrl = GetPackageUrl(feed);
+            var packageUrl = GetPackageUrl(new FeedUrl(feed));
             var result = GetFeed(packageUrl);
             var lines = SplitFeedIntoLines(result);
 
@@ -57,12 +67,12 @@ namespace FeedChecker
             return result;
         }
 
-        private static string GetPackageUrl(string feed)
+        private static string GetPackageUrl(FeedUrl feedUrl)
         {
-            if (!feed.EndsWith("/"))
-                feed = feed + "/";
+            if (!feedUrl.Feed.EndsWith("/"))
+                feedUrl.Feed = feedUrl.Feed + "/";
 
-            var packageUrl = feed + "main/binary-amd64/Packages";
+            var packageUrl = feedUrl.Feed + "main/binary-amd64/Packages";
             return packageUrl;
         }
     }
